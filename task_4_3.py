@@ -57,6 +57,11 @@ def is_number(string):
 
 inquiry = input('Введите аббревиатуру требуемой валюты(Например USD, EUR, GBP): ')
 value_all = currency_rates(response_get)
+check = 0
 for elem in value_all.items():
     if str(elem[0]) == inquiry.upper():
         print(f'{elem[1][0]} {elem[0]} = {elem[1][1]:.2f} RUB')
+    else:
+        check += 1
+if check == len(value_all):
+    print('Введенного значени валюты не существует')

@@ -43,10 +43,11 @@ def currency_rates(inquiry):
                 print(datetime.date(date_object))
     else:
         print('Error')
+    check = 0
     for elem in dict_val.items():
         if str(elem[0]) == inquiry.upper():
-            return  f'{elem[1][0]} {elem[0]} = {elem[1][1]:.02f} RUB'
-
-
-# inquiry = input('Введите аббревиатуру требуемой валюты(Например USD, EUR, GBP): ')
-# currency_rates(inquiry)
+            return f'{elem[1][0]} {elem[0]} = {elem[1][1]:.02f} RUB'
+        else:
+            check += 1
+    if check == len(dict_val):
+        return 'Введенного значени валюты не существует'
