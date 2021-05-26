@@ -29,8 +29,10 @@ def currency_rates(response):
             if idx > 0:
                 for i in range(idx):
                     nominal = nominal + '0'
-            odd.append(nominal)
-            odd.append(value)
+            value = value.replace(',', '.')
+            if is_number(value) is True:
+                odd.append(nominal)
+                odd.append(float(value))
             dict_val.setdefault(char_code, odd)
 
             date_idx = elem_val.find('Date')
@@ -44,8 +46,17 @@ def currency_rates(response):
     return dict_val
 
 
+def is_number(string):
+    """Функция проверки можел ли числа value на тип float"""
+    try:
+        float(string)
+        return True
+    except ValueError:
+        return False
+
+
 inquiry = input('Введите аббревиатуру требуемой валюты(Например USD, EUR, GBP): ')
 value_all = currency_rates(response_get)
 for elem in value_all.items():
     if str(elem[0]) == inquiry.upper():
-        print(f'{elem[1][0]} {elem[0]} = {elem[1][1]} RUB')
+        print(f'{elem[1][0]} {elem[0]} = {elem[1][1]:.2f} RUB')

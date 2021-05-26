@@ -28,8 +28,13 @@ def currency_rates(inquiry):
             if idx > 0:
                 for i in range(idx):
                     nominal = nominal + '0'
-            odd.append(nominal)
-            odd.append(value)
+            value = value.replace(',', '.')
+            try:
+                float(value)
+                odd.append(nominal)
+                odd.append(float(value))
+            except:
+                pass
             dict_val.setdefault(char_code, odd)
             date_idx = elem_val.find('Date')
             if date_idx != -1:
@@ -40,7 +45,7 @@ def currency_rates(inquiry):
         print('Error')
     for elem in dict_val.items():
         if str(elem[0]) == inquiry.upper():
-            return  f'{elem[1][0]} {elem[0]} = {elem[1][1]} RUB'
+            return  f'{elem[1][0]} {elem[0]} = {elem[1][1]:.02f} RUB'
 
 
 # inquiry = input('Введите аббревиатуру требуемой валюты(Например USD, EUR, GBP): ')
