@@ -30,6 +30,7 @@ def currency_rates(response):
             dict_val.setdefault(char_code, odd)
     else:
         print('Error')
+    dict_val.popitem()
     return dict_val
 
 
@@ -37,4 +38,4 @@ inquiry = input('Введите аббревиатуру требуемой ва
 value_all = currency_rates(response_get)
 for elem in value_all.items():
     if str(elem[0]) == inquiry.upper():
-        print(f'{elem[1][0]} {elem[0]} = {elem[1][1]} RUB')
+       print(f'{elem[1][0]} {elem[0]} = {elem[1][1]} RUB')
